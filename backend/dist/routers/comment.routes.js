@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.commentRouter = void 0;
+const express_1 = require("express");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const comment_controller_1 = require("../controllers/comment.controller");
+exports.commentRouter = (0, express_1.Router)();
+exports.commentRouter.get("/my", auth_middleware_1.authMiddleware, comment_controller_1.GET_MY_COMMENTS);
+exports.commentRouter.get("/:bookId", auth_middleware_1.authMiddleware, comment_controller_1.GET_BOOK_COMMENTS);
+exports.commentRouter.post("/:bookId", auth_middleware_1.authMiddleware, comment_controller_1.CREATE_COMMENT);
+exports.commentRouter.put("/:id", auth_middleware_1.authMiddleware, comment_controller_1.UPDATE_COMMENT);
+exports.commentRouter.delete("/:id", auth_middleware_1.authMiddleware, comment_controller_1.DELETE_COMMENT);

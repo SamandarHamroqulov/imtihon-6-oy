@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.profileRouter = void 0;
+const express_1 = require("express");
+const profile_controller_1 = require("../controllers/profile.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
+const admin_middleware_1 = require("../middlewares/admin.middleware");
+const upload_service_1 = require("../services/upload.service");
+exports.profileRouter = (0, express_1.Router)();
+exports.profileRouter.use(auth_middleware_1.authMiddleware);
+exports.profileRouter.get("/me", profile_controller_1.GET_MY_PROFILE);
+exports.profileRouter.put("/me", (0, upload_service_1.uploadFile)("avatars").single("avatar"), profile_controller_1.UPDATE_MY_PROFILE);
+exports.profileRouter.get("/:userId", admin_middleware_1.adminMiddleware, profile_controller_1.GET_USER_PROFILE);

@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.authRouter = void 0;
+const express_1 = require("express");
+const auth_controller_1 = require("../controllers/auth.controller");
+const upload_service_1 = require("../services/upload.service");
+exports.authRouter = (0, express_1.Router)();
+exports.authRouter.post("/register", (0, upload_service_1.uploadFile)("avatars").single("image"), auth_controller_1.REGISTER);
+exports.authRouter.post("/verify/otp", auth_controller_1.VERIFY_USER);
+exports.authRouter.post("/resend/otp", auth_controller_1.RESEND_OTP);
+exports.authRouter.post("/login", auth_controller_1.LOGIN);
+exports.authRouter.post("/forgot/password", auth_controller_1.FORGOT_PASSWORD);
+exports.authRouter.post("/reset/password", auth_controller_1.RESET_PASSWORD);
+exports.authRouter.post("/change/password", auth_controller_1.CHANGE_PASSWORD);
+exports.authRouter.post("/refresh", auth_controller_1.REFRESH);
